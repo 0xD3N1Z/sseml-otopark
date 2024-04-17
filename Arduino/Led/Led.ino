@@ -25,5 +25,5 @@ void setup() {
 
 void loop() {
   pSerial.handle(pDurumu);
-  pLED.handle();
+  pLED.handle(pDurumu);
 }

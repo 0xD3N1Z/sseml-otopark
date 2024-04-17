@@ -22,4 +22,13 @@
 #define LED_12 13
 #define LED_13 A5
 
+//Boş park alanı gösterilirken LED'lerin ne kadar sıklıkta ve
+//ne kadar süre yanık kalacağı
+#define LED_BLINK_INTERVAL 1000
+//#define LED_BLINK_DURATION 100
+
+//Ledlerin hangi lojik seviyelerinde açık/kapalı olacağı
+#define LED_STATE_ON 1
+#define LED_STATE_OFF 0
+
 #endif

@@ -22,7 +22,17 @@ class ParkLed {
  public:
     void init();
 
-    void handle();
+    void handle(ParkDurumu &pDurumu);
+
+  private:
+    unsigned long _prevBlinkMillis = -1;
+    bool _blinkState = false;
+
+    void off(ParkDurumu &pDurumu);
+
+    void on(ParkDurumu &pDurumu);
+
+    void blink(ParkDurumu &pDurumu);
 };
 
 #endif
