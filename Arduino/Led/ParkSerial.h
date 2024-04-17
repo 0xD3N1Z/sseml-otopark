@@ -11,6 +11,7 @@ class ParkSerial {
 
   private:
     String _serialcmd;
+    String _crcstr;
 };
 
 #endif
