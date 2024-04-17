@@ -1,6 +1,6 @@
 #include <Arduino.h> //Arduino kütüphanesi
 
-#include "Led.h" //C++ header dosyası
+#include "ParkLed.h" //C++ header dosyası
 #include "Config.h" //Ayarları içeren dosya
 
 void ParkLed::init() {

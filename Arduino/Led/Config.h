@@ -4,6 +4,8 @@
 //Seri iletişim sırasında tanıtılacak özel ID
 #define SERIAL_ID "OTOPARK-LED-A"
 
+#define SERIAL_BAUDRATE 9600
+
 //Park çizgisi ışıklarının bağlandığı pinler
 //12 adet dijital, 1 adet analog çıkış
 #define LED_1 2

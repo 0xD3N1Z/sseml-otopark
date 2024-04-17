@@ -1,4 +1,9 @@
-uint16_t checksumCalculator(uint8_t* data, uint16_t length) {
+#include <Arduino.h>
+
+#include "ParkUtils.h"
+#include "Config.h"
+
+uint16_t checksum(uint8_t* data, uint16_t length) {
   uint16_t curr_crc = 0x0000;
 
   uint8_t sum1 = (uint8_t)curr_crc;
