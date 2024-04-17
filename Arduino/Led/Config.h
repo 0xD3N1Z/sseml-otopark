@@ -24,7 +24,7 @@
 
 //Boş park alanı gösterilirken LED'lerin ne kadar sıklıkta ve
 //ne kadar süre yanık kalacağı
-#define LED_BLINK_INTERVAL 1000
+#define LED_BLINK_INTERVAL 500
 //#define LED_BLINK_DURATION 100
 
 //Ledlerin hangi lojik seviyelerinde açık/kapalı olacağı
