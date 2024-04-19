@@ -47,15 +47,15 @@ void ParkLed::off(ParkDurumu &pDurumu) {
 }
 
 void ParkLed::on(ParkDurumu &pDurumu) {
-  if (pDurumu.P1 == 1 || pDurumu.P2 == 1) digitalWrite(LED_1, LED_STATE_ON);
-  if (pDurumu.P2 == 1 || pDurumu.P3 == 1) digitalWrite(LED_2, LED_STATE_ON);
+  if ((pDurumu.P1 == 1 || pDurumu.P2 == 1) && (pDurumu.P1 != 2 && pDurumu.P2 != 2)) digitalWrite(LED_1, LED_STATE_ON);
+  if ((pDurumu.P2 == 1 || pDurumu.P3 == 1) && (pDurumu.P2 != 2 && pDurumu.P3 != 2)) digitalWrite(LED_2, LED_STATE_ON);
   if (pDurumu.P3 == 1 || pDurumu.P4 == 1) digitalWrite(LED_3, LED_STATE_ON);
   if (pDurumu.P4 == 1 || pDurumu.P5 == 1) digitalWrite(LED_4, LED_STATE_ON);
   if (pDurumu.P5 == 1 || pDurumu.P6 == 1) digitalWrite(LED_5, LED_STATE_ON);
   if (pDurumu.P6 == 1 || pDurumu.P7 == 1) digitalWrite(LED_6, LED_STATE_ON);
   if (pDurumu.P7 == 1 || pDurumu.P8 == 1) digitalWrite(LED_7, LED_STATE_ON);
   if (pDurumu.P8 == 1 || pDurumu.P9 == 1) digitalWrite(LED_8, LED_STATE_ON);
-  if (pDurumu.P9 == 1 || pDurumu.P11 == 1) digitalWrite(LED_9, LED_STATE_ON);
+  if (pDurumu.P9 == 1 || pDurumu.P10 == 1) digitalWrite(LED_9, LED_STATE_ON);
   if (pDurumu.P10 == 1 || pDurumu.P11 == 1) digitalWrite(LED_10, LED_STATE_ON);
   if (pDurumu.P11 == 1 || pDurumu.P12 == 1) digitalWrite(LED_11, LED_STATE_ON);
   if (pDurumu.P12 == 1 || pDurumu.P13 == 1) digitalWrite(LED_12, LED_STATE_ON);
