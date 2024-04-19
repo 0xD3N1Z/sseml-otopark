@@ -19,6 +19,14 @@ void ParkLed::init() {
   pinMode(LED_11, OUTPUT);
   pinMode(LED_12, OUTPUT);
   pinMode(LED_13, OUTPUT);
+
+#ifdef LED_MASTER
+  pinMode(LED_SYNC, OUTPUT);
+#endif
+
+#ifndef LED_MASTER
+  pinMode(LED_SYNC, INPUT_PULLUP);
+#endif
 }
 
 void ParkLed::handle(ParkDurumu &pDurumu) {
@@ -63,6 +71,26 @@ void ParkLed::on(ParkDurumu &pDurumu) {
 }
 
 void ParkLed::blink(ParkDurumu &pDurumu) {
+#ifndef LED_MASTER
+  _blinkState = digitalRead(LED_SYNC);
+
+  if (pDurumu.P1 == 2 || pDurumu.P2 == 2) digitalWrite(LED_1, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P2 == 2 || pDurumu.P3 == 2) digitalWrite(LED_2, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P3 == 2 || pDurumu.P4 == 2) digitalWrite(LED_3, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P4 == 2 || pDurumu.P5 == 2) digitalWrite(LED_4, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P5 == 2 || pDurumu.P6 == 2) digitalWrite(LED_5, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P6 == 2 || pDurumu.P7 == 2) digitalWrite(LED_6, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P7 == 2 || pDurumu.P8 == 2) digitalWrite(LED_7, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P8 == 2 || pDurumu.P9 == 2) digitalWrite(LED_8, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P9 == 2 || pDurumu.P10 == 2) digitalWrite(LED_9, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P10 == 2 || pDurumu.P11 == 2) digitalWrite(LED_10, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P11 == 2 || pDurumu.P12 == 2) digitalWrite(LED_11, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P12 == 2 || pDurumu.P13 == 2) digitalWrite(LED_12, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+  if (pDurumu.P13 == 2 || pDurumu.P14 == 2) digitalWrite(LED_13, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
+
+  return;
+#endif
+
   unsigned long currentMillis = millis();
   if (_prevBlinkMillis == -1) _prevBlinkMillis = currentMillis;
 

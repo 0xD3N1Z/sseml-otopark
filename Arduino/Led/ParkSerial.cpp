@@ -65,7 +65,9 @@ void ParkSerial::handle(ParkDurumu &pDurumu) {
 
       //CRC değerlerini karşılaştır
       bool crc_match = true;
-      /* for (int i = 0; i <= 3; i++) {
+
+      #ifndef SKIP_CRC
+      for (int i = 0; i <= 3; i++) {
         char crc_n = _crcstr[i];
         char serial_n = serial_crc[i];
 
@@ -73,8 +75,9 @@ void ParkSerial::handle(ParkDurumu &pDurumu) {
           crc_match = false;
           break;
         }
-      } */
-
+      }
+      #endif
+      
       if (!crc_match) {
         Serial.println("CRC-ERR");
         goto clearserial;
