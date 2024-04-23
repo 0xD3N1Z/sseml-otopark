@@ -15,14 +15,15 @@
 #include "Config.h"
 
 ParkSerial pSerial;
-//ParkSensorler pSensorler;
+SensorDurumu sensorDurum;
+ParkSensorler pSensorler;
 
 void setup() {
   pSerial.init();
-  //pSensorler.init();
+  pSensorler.init();
 }
 
 void loop() {
-  pSerial.handle();
-  /*pLED.handle(pDurumu); */
+  pSerial.handle(sensorDurum);
+  pSensorler.handle(sensorDurum);
 }

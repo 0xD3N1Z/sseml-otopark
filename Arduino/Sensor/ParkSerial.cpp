@@ -1,6 +1,8 @@
+#include "HardwareSerial.h"
 #include <Arduino.h>
 
 #include "ParkSerial.h"
+#include "ParkSensorler.h"
 #include "ParkUtils.h"
 #include "Config.h"
 
@@ -8,7 +10,7 @@ void ParkSerial::init() {
   Serial.begin(SERIAL_BAUDRATE);
 }
 
-void ParkSerial::handle() {
+void ParkSerial::handle(SensorDurumu &sensorDurum) {
   if (Serial.available()) {
     _serialcmd = Serial.readStringUntil('\n');
     _serialcmd.trim();
@@ -30,7 +32,26 @@ void ParkSerial::handle() {
     if (_serialcmd.equals("PARK-SENSOR?")) {
       response = true;
 
-      Serial.println("tcrt5000 sensör ölçümleri yap");
+      //A bloğu bilgileri için hesaplanan CRC değeri
+      uint16_t crc_A = checksum((uint8_t*)sensorDurum.tcrt5000A, 14);
+      _crc_a_str = String(crc_A, HEX);
+      _crc_a_str.toUpperCase();
+
+      //B bloğu bilgileri için hesaplanan CRC değeri
+      uint16_t crc_B = checksum((uint8_t*)sensorDurum.tcrt5000B, 14);
+      _crc_b_str = String(crc_B, HEX);
+      _crc_b_str.toUpperCase();
+
+      //Seriye yazdır
+      Serial.print("PARK-SENSOR:");
+      for(int i = 0; i <= 13; i++) Serial.print(sensorDurum.tcrt5000A[i]);
+      Serial.print(";");
+      Serial.print(_crc_a_str);
+      Serial.print(";");
+      for(int i = 0; i <= 13; i++) Serial.print(sensorDurum.tcrt5000B[i]);
+      Serial.print(";");
+      Serial.print(_crc_b_str);
+      Serial.print(";");
     }
 
     //Raspberry Pi hava durumu bilgilerini almak istediğinde
