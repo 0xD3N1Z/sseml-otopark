@@ -4,6 +4,7 @@
 
 #include "ParkSerial.h"
 #include "ParkSensorler.h"
+#include "ParkCihazlar.h"
 #include "ParkUtils.h"
 #include "Config.h"
 
@@ -11,7 +12,7 @@ void ParkSerial::init() {
   Serial.begin(SERIAL_BAUDRATE);
 }
 
-void ParkSerial::handle(SensorDurumu &sensorDurum) {
+void ParkSerial::handle(SensorDurumu &sensorDurum, CihazDurumu &cihazDurum) {
   if (Serial.available()) {
     _serialcmd = Serial.readStringUntil('\n');
     _serialcmd.trim();
@@ -103,6 +104,19 @@ void ParkSerial::handle(SensorDurumu &sensorDurum) {
       Serial.println("RTC modülüne yeni saati yazdır");
     }
 
+    if (_serialcmd.equals("GATE-ENTER")) {
+      response = true;
+
+      cihazDurum.giris_servo = true;
+      beep(BeepCodes::GATE);
+    }
+
+    if (_serialcmd.equals("GATE-EXIT")) {
+      response = true;
+
+      cihazDurum.cikis_servo = true;
+      beep(BeepCodes::GATE);
+    }
 
     //Geçersiz komut
     if (!response) Serial.println("CMD-ERROR");

@@ -2,12 +2,13 @@
 #define PARKSERIAL_H
 
 #include "ParkSensorler.h"
+#include "ParkCihazlar.h"
 
 class ParkSerial {
   public:
     void init();
 
-    void handle(SensorDurumu &sensorDurum);
+    void handle(SensorDurumu &sensorDurum, CihazDurumu &cihazDurum);
 
   private:
     String _serialcmd;

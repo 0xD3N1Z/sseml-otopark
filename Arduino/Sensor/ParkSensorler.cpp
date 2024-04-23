@@ -227,7 +227,7 @@ void ParkSensorler::power(SensorDurumu &sensorDurum) {
     bool wallPlugInserted = digitalRead(WALL_PLUG_DETECTION_PIN);
     bool solarInserted = digitalRead(SOLAR_DETECTION_PIN);
 
-    float batteryVoltage = (((analogRead(BATTERY_VOLTAGE_PIN) * 5) / 1023.0) * 3) - 1.9;
+    float batteryVoltage = (((analogRead(BATTERY_VOLTAGE_PIN) * 5) / 1023.0) * 3) - BATTERY_VOLTAGE_OFFSET;
     float solarVoltage = solarInserted ? ((analogRead(SOLAR_VOLTAGE_PIN) * 5) / 1023.0) : 0;
 
     #ifdef POWER_DEBUG

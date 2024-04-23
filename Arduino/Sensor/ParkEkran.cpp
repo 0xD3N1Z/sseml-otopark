@@ -4,9 +4,11 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SH110X.h>
+#include <RtcDS1302.h>
 
 #include "ParkEkran.h"
 #include "ParkSensorler.h"
+#include "ParkCihazlar.h"
 #include "Config.h"
 
 Adafruit_SH1106G display = Adafruit_SH1106G(128, 64, OLED_MOSI, OLED_CLK, OLED_DC, OLED_RST, OLED_CS);
@@ -16,17 +18,11 @@ void ParkEkran::init() {
   sseml();
 }
 
-void ParkEkran::handle(SensorDurumu &sensorDurum) {
+void ParkEkran::handle(SensorDurumu &sensorDurum, CihazDurumu &cihazDurum) {
   unsigned long currentMillis = millis();
 
   if (currentMillis - _prevPageSwitchMillis >= OLED_SWITCH_INTERVAL) {
     _prevPageSwitchMillis = currentMillis;
-
-    //RFID Kontrolünde
-    if (_currentPageIndex == 5) {
-      _currentPageIndex = 0;
-      return;
-    }
 
     if (_currentPageIndex == 3) _currentPageIndex = 0;
     else _currentPageIndex++;
@@ -34,7 +30,7 @@ void ParkEkran::handle(SensorDurumu &sensorDurum) {
     switch(_currentPageIndex) {
       case 0: sseml(); break;
       case 1: doluluk(sensorDurum); break;
-      case 2: saat_hava_durumu(sensorDurum); break;
+      case 2: saat_hava_durumu(sensorDurum, cihazDurum); break;
       case 3: guc_bilgisi(sensorDurum); break;
     }
   }
@@ -75,24 +71,30 @@ void ParkEkran::doluluk(SensorDurumu &sensorDurum) {
   display.display();
 }
 
-void ParkEkran::saat_hava_durumu(SensorDurumu &sensorDurum) {
+void ParkEkran::saat_hava_durumu(SensorDurumu &sensorDurum, CihazDurumu &cihazDurum) {
   display.clearDisplay();
   display.setTextSize(2);
   display.setTextColor(SH110X_WHITE);
   display.setCursor(0, 0);
 
-  display.println("\n  9:30 AM");
+  display.print("\n  ");
+  display.print(cihazDurum.rtc_date.Hour());
+  display.print(":");
+  display.print(cihazDurum.rtc_date.Minute());
+  display.println(cihazDurum.rtc_date.Hour() <= 12 ? " AM" : "PM");
 
   display.setTextSize(1);
-  display.println("\n      24.04.2024");
+  display.print("\n      ");
+  display.print(cihazDurum.rtc_date.Day());
+  display.print(".");
+  display.print(cihazDurum.rtc_date.Month());
+  display.print(".");
+  display.println(cihazDurum.rtc_date.Year());
 
-  display.println("\n   S: 26.6 N: 40.0");
-
-
-  /* display.println("\nSicaklik: 26.6 (25.5)");
-  display.println("Nem: 40.0");
-
-  display.println("\n\n\n9.30 AM 24.04.2024"); */
+  display.print("\n   S: ");
+  display.print(sensorDurum.sicaklik);
+  display.print(" N: ");
+  display.println(sensorDurum.nem);
 
   display.display();
 }
@@ -103,12 +105,17 @@ void ParkEkran::guc_bilgisi(SensorDurumu &sensorDurum) {
   display.setTextColor(SH110X_WHITE);
   display.setCursor(0, 0);
 
-  display.println("güç bilgisi deneme");
+  display.print("KABLO: ");
+  display.println(sensorDurum.wallPlugInserted ? "TAKILI": "TAKILI DEGIL");
+
+  display.print("\nSOLAR: ");
+  display.println(sensorDurum.solarInserted ? "TAKILI": "TAKILI DEGIL");
+
+  display.print("\nPIL_V: ");
+  display.println(sensorDurum.batteryVoltage);
+
+  display.print("\nSOLAR_V: ");
+  display.println(sensorDurum.solarVoltage);
 
   display.display();
-}
-
-void ParkEkran::rfid() {
-  _currentPageIndex = 4;
-  
 }
