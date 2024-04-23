@@ -11,6 +11,8 @@ class ParkSerial {
 
   private:
     String _serialcmd;
+    String _tcrt5000A_str;
+    String _tcrt5000B_str;
     String _crc_a_str;
     String _crc_b_str;
 };

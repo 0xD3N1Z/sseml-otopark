@@ -34,7 +34,7 @@
 // - Kaç ölçüm alınıp ortalaması bulunsun
 // - Ölçümler arası bekleme süresi
 // - Sensörleri kapatmak için kullanılan mosfetin pini
-#define TCRT_TRIGGER 500
+#define TCRT_TRIGGER 700
 #define TCRT_TRIGGER_SAMPLES 5
 #define TCRT_MEASURE_AVG 3
 #define TCRT_MEASURE_INTERVAL 1000

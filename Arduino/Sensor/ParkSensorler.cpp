@@ -51,6 +51,7 @@ void ParkSensorler::tcrt5000(SensorDurumu &sensorDurum) {
       for (int ii = 0; ii < TCRT_MEASURE_AVG; ii++) sensorTotal += analogRead(MUX_A);
 
       long sensorAvg = sensorTotal / TCRT_MEASURE_AVG; //ortalaması alınmış değer
+      //Serial.println(sensorAvg);
 
       //Tetik aralığının üstündeyse ve hala 0 olmamışsa bir çıkart
       if ((sensorAvg > TCRT_TRIGGER) && (_tcrt5000A_sampleCount[i] > 0)) _tcrt5000A_sampleCount[i]--;
@@ -67,6 +68,7 @@ void ParkSensorler::tcrt5000(SensorDurumu &sensorDurum) {
       for (int ii = 0; ii < TCRT_MEASURE_AVG; ii++) sensorTotal += analogRead(MUX_B);
 
       long sensorAvg = sensorTotal / TCRT_MEASURE_AVG; //ortalaması alınmış değer
+      //if (i == 0)Serial.println(sensorAvg);
 
       //Tetik aralığının üstündeyse ve hala 0 olmamışsa bir çıkart
       if ((sensorAvg > TCRT_TRIGGER) && (_tcrt5000B_sampleCount[i] > 0)) _tcrt5000B_sampleCount[i]--;

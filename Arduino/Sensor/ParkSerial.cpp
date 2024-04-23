@@ -33,25 +33,29 @@ void ParkSerial::handle(SensorDurumu &sensorDurum) {
       response = true;
 
       //A bloğu bilgileri için hesaplanan CRC değeri
-      uint16_t crc_A = checksum((uint8_t*)sensorDurum.tcrt5000A, 14);
+      _tcrt5000A_str = "";
+      for (int i = 0; i <= 13; i++) _tcrt5000A_str += sensorDurum.tcrt5000A[i] == 1 ? '1' : '0';
+      uint16_t crc_A = checksum((uint8_t*)_tcrt5000A_str.c_str(), 14);
       _crc_a_str = String(crc_A, HEX);
       _crc_a_str.toUpperCase();
 
       //B bloğu bilgileri için hesaplanan CRC değeri
-      uint16_t crc_B = checksum((uint8_t*)sensorDurum.tcrt5000B, 14);
+      _tcrt5000B_str = "";
+      for (int i = 0; i <= 13; i++) _tcrt5000B_str += sensorDurum.tcrt5000B[i] == 1 ? '1' : '0';
+      uint16_t crc_B = checksum((uint8_t*)_tcrt5000B_str.c_str(), 14);
       _crc_b_str = String(crc_B, HEX);
       _crc_b_str.toUpperCase();
 
       //Seriye yazdır
       Serial.print("PARK-SENSOR:");
-      for(int i = 0; i <= 13; i++) Serial.print(sensorDurum.tcrt5000A[i]);
+      Serial.print(_tcrt5000A_str);
       Serial.print(";");
       Serial.print(_crc_a_str);
       Serial.print(";");
-      for(int i = 0; i <= 13; i++) Serial.print(sensorDurum.tcrt5000B[i]);
+      Serial.print(_tcrt5000B_str);
       Serial.print(";");
       Serial.print(_crc_b_str);
-      Serial.print(";");
+      Serial.println(";");
     }
 
     //Raspberry Pi hava durumu bilgilerini almak istediğinde
