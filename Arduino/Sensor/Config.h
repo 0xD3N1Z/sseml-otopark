@@ -75,7 +75,7 @@
 #define OLED_RST 5
 #define OLED_DC 6
 #define OLED_CS 7
-#define OLED_SWITCH_INTERVAL 10000
+#define OLED_SWITCH_INTERVAL 5000
 
 //RFID Kart okuyucu
 #define RFID_A_RST 8
