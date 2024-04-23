@@ -1,6 +1,12 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+//Hata ayıklama
+//#define DHT_DEBUG
+//#define TCRT_DEBUG
+//#define POWER_DEBUG
+//#define LDR_DEBUG
+
 //Seri iletişim sırasında tanıtılacak özel ID
 #define SERIAL_ID "OTOPARK-SENSOR"
 
@@ -9,7 +15,7 @@
 
 //CRC veri bütünlüğünü hata ayıklama amacıyla atlamak için
 //Sistem çalışırken açık olmalı!!
-#define SKIP_CRC
+//#define SKIP_CRC
 
 //Multiplexer pinleri
 // - A bloğu
@@ -28,16 +34,62 @@
 //Diğer bileşenlerin pinleri
 #define BUZZER_PIN 33
 
+//DHT sensörü
+#define DHT_PIN 35
+#define DHT_MEASURE_INTERVAL 5000
+
 //TCRT5000 Sensörleri için ayarlar
 // - Hangi değerin altındaysa park edildi sayılacak
 // - Doğrulamak için kaç ölçüm alınsın
 // - Kaç ölçüm alınıp ortalaması bulunsun
 // - Ölçümler arası bekleme süresi
 // - Sensörleri kapatmak için kullanılan mosfetin pini
+// - Hata ayıklama için yazdırma
 #define TCRT_TRIGGER 700
 #define TCRT_TRIGGER_SAMPLES 5
 #define TCRT_MEASURE_AVG 3
 #define TCRT_MEASURE_INTERVAL 1000
 #define TCRT_MOSFET_PIN 2
+
+//Güç sensörleri pinleri
+// - 5V Akım sensörü
+// - Solar voltaj
+// - Pil voltajı
+// - Solar panel kontrolü
+// - 5V adaptör kontrolü
+#define CURRENT_SENSOR_PIN A2
+#define SOLAR_VOLTAGE_PIN A3
+#define BATTERY_VOLTAGE_PIN A4
+#define SOLAR_DETECTION_PIN 37
+#define WALL_PLUG_DETECTION_PIN 39
+#define POWER_MEASURE_INTERVAL 1000
+
+//RTC Modülü
+#define RTC_CLK 30
+#define RTC_DAT 32
+#define RTC_RST 34
+
+//OLED Ekran
+#define OLED_CLK 3
+#define OLED_MOSI 4
+#define OLED_RST 5
+#define OLED_DC 6
+#define OLED_CS 7
+#define OLED_SWITCH_INTERVAL 10000
+
+//RFID Kart okuyucu
+#define RFID_A_RST 8
+#define RFID_A_SS 9
+
+//Servolar
+#define SERVO_GIRIS 10
+#define SERVO_CIKIS 11
+
+//LDR
+#define LDR_TRIGGER 500
+#define LDR_TRIGGER_SAMPLES 10
+#define LDR_MEASURE_INTERVAL 200
+#define LDR_GIRIS A5
+#define LDR_CIKIS A6
 
 #endif

@@ -1,4 +1,5 @@
 #include "HardwareSerial.h"
+#include "Print.h"
 #include <Arduino.h>
 
 #include "ParkSerial.h"
@@ -62,14 +63,28 @@ void ParkSerial::handle(SensorDurumu &sensorDurum) {
     if (_serialcmd.equals("WEATHER-SENSOR?")) {
       response = true;
 
-      Serial.println("DHT11 modülünden hava durumunu oku");
+      Serial.print("WEATHER-SENSOR:");
+      Serial.print(sensorDurum.sicaklik);
+      Serial.print(";");
+      Serial.print(sensorDurum.hissedilen_sicaklik);
+      Serial.print(";");
+      Serial.print(sensorDurum.nem);
+      Serial.println(";");
     }
 
     //Raspberry Pi güç bilgilerini almak istediğinde
     if (_serialcmd.equals("POWER-SENSOR?")) {
       response = true;
 
-      Serial.println("Birçok sensörden güç bilgilerini al");
+      Serial.print("POWER-SENSOR:");
+      Serial.print(sensorDurum.wallPlugInserted);
+      Serial.print(";");
+      Serial.print(sensorDurum.solarInserted);
+      Serial.print(";");
+      Serial.print(sensorDurum.batteryVoltage);
+      Serial.print(";");
+      Serial.print(sensorDurum.solarVoltage);
+      Serial.println(";");
     }
 
     // -- MODÜLLER --
