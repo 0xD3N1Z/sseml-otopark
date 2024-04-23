@@ -1,17 +1,14 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
 //Seri iletişim sırasında tanıtılacak özel ID
 #define SERIAL_ID "OTOPARK-SENSOR"
 
-//Servo
-#define GIRIS_SERVO 9
-#define CIKIS_SERVO 10
+//Seri iletişim için kullanılacak veri iletim hızı
+#define SERIAL_BAUDRATE 9600
 
-//Multiplexer pinleri
-#define MUX_PIN A0
-#define MUX_S0 2
-#define MUX_S1 3
-#define MUX_S2 4
-#define MUX_S3 5
+//CRC veri bütünlüğünü hata ayıklama amacıyla atlamak için
+//Sistem çalışırken açık olmalı!!
+#define SKIP_CRC
 
-//LAZER
-#define GIRIS_LDR 13
-#define CIKIS_LDR 12
+#endif

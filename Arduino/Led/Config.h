@@ -32,7 +32,7 @@
 #define LED_13 12
 
 //Ledlerin yanıp sönmesini eşitlemek için kullanılacak pin
-#define LED_SYNC 13
+#define LED_SYNC A0
 
 //Boş park alanı gösterilirken LED'lerin ne kadar sıklıkta ve
 //ne kadar süre yanık kalacağı

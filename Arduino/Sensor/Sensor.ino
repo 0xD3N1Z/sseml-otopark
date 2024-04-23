@@ -9,12 +9,20 @@
 //                                                                                           
 // Sensörler için
 
+#include "ParkSensorler.h"
+#include "ParkSerial.h"
+#include "ParkUtils.h"
+#include "Config.h"
+
+ParkSerial pSerial;
+//ParkSensorler pSensorler;
 
 void setup() {
-  Serial.begin(9600);
-
+  pSerial.init();
+  //pSensorler.init();
 }
 
 void loop() {
-
+  pSerial.handle();
+  /*pLED.handle(pDurumu); */
 }

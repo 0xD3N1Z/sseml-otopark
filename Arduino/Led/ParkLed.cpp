@@ -97,6 +97,7 @@ void ParkLed::blink(ParkDurumu &pDurumu) {
   if (currentMillis - _prevBlinkMillis >= LED_BLINK_INTERVAL) {
     _prevBlinkMillis = currentMillis;
     _blinkState = !_blinkState;
+    digitalWrite(LED_SYNC, _blinkState);
 
     if (pDurumu.P1 == 2 || pDurumu.P2 == 2) digitalWrite(LED_1, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
     if (pDurumu.P2 == 2 || pDurumu.P3 == 2) digitalWrite(LED_2, _blinkState ? LED_STATE_ON : LED_STATE_OFF);
