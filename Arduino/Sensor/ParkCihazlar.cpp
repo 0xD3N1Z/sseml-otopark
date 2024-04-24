@@ -23,6 +23,8 @@ void ParkCihazlar::init() {
   cikis_servo.write(SERVO_CIKIS_CLOSED);
 
   Rtc.Begin();
+  /* RtcDateTime compiled = RtcDateTime(__DATE__, __TIME__);
+  Rtc.SetDateTime(compiled); */
 }
 
 void ParkCihazlar::handle(SensorDurumu &sensorDurum, CihazDurumu &cihazDurum) {

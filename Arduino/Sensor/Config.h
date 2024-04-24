@@ -46,7 +46,7 @@
 // - Sensörleri kapatmak için kullanılan mosfetin pini
 // - Hata ayıklama için yazdırma
 #define TCRT_TRIGGER 700
-#define TCRT_TRIGGER_SAMPLES 5
+#define TCRT_TRIGGER_SAMPLES 3
 #define TCRT_MEASURE_AVG 3
 #define TCRT_MEASURE_INTERVAL 1000
 #define TCRT_MOSFET_PIN 2
